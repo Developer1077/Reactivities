@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Client</title>
+    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">*@
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link href="~/lib/toastr.js/toastr.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    @await RenderSectionAsync("Styles", required: false)
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark fixed-top border-bottom box-shadow" style="background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Meeting App</a>
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="members" asp-action="index">Matches</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="lists" asp-action="index">Lists</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="messages" asp-action="index">Messages</a>
+                        </li>
+              
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="buggy" asp-action="index">Errors</a>
+                        </li>
+                    </ul>
+                    <div class="dropdown">
+                        <img src="/assets/user.png" alt="" style="max-height:50px; border:2px solid #fff; display:inline;" />
+                        <a class="btn dropdown-toggle text-white" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            Welcome 
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item" asp-controller="members" asp-action="memberupdate"><i class="fa fa-user-edit mr-3"></i> Edit Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" asp-controller="account" asp-action="logout"><i class="fa fa-door-open mr-3"></i> Logout</a></li>
+                        </ul>
+                    </div>
+            </div>
+        </nav>        
+    </header>
+    <div class="container" style="margin-top:100px;">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - Client - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/jquery-3.5.1.min.js"></script>
+    
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/font-awesome/js/all.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+    
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+</body>
+</html>
