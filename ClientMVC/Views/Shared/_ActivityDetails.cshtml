@@ -1,0 +1,18 @@
+﻿@model ActivityFormViewModel
+@if (Model.SelectedActivity != null && Model.EditMode == false)
+{
+    <div class="card w-100">
+        <img src="/images/categoryImages/@(Model.SelectedActivity.Category).jpg" class="card-img-top" alt="@Model.SelectedActivity.Category">
+        <div class="card-body">
+            <h5 class="card-title">@Model.SelectedActivity.Title</h5>
+            <small class="text-muted">@Model.SelectedActivity.Date</small>
+            <p class="card-text">@Model.SelectedActivity.Description</p>
+            <div class="btn-group w-100">
+                <a type="button" class="btn btn-outline-primary" asp-controller="activities" asp-action="index" asp-route-id="@Model.SelectedActivity.Id" asp-route-edit="true">Edit</a>
+                <a class="btn btn-outline-secondary" asp-action="index" asp-controller="activities" asp-route-id="">Cancel</a>
+            </div>
+        </div>
+    </div>
+    <br />
+}
+

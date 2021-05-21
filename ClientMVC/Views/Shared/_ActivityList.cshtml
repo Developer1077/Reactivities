@@ -1,0 +1,20 @@
+﻿@model ICollection<Activity>
+@foreach (var activity in Model)
+{
+    <div class="mx-2 py-4">
+        
+            <h5 class="card-title">@activity.Title</h5>
+            <span>@activity.Date</span>
+            <h6>@activity.Description</h6>
+            <div class="btn-toolbar justify-content-between" role="toolbar">
+                <a class="btn btn-outline-secondary">@activity.Category</a>
+                <div>
+                    <a class="btn btn-danger" asp-controller="activities" asp-action="delete" asp-route-id="@activity.Id">Delete</a>
+                    <a class="btn btn-primary" asp-controller="activities" asp-action="index" asp-route-id="@activity.Id">View</a>
+
+                </div>
+            </div>
+            <hr class="mb-0 pb-0"/>
+        
+    </div>
+}

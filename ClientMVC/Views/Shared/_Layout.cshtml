@@ -12,44 +12,14 @@
     @await RenderSectionAsync("Styles", required: false)
 
 </head>
-<body>
+<body style=" background-color: #f3eded">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark fixed-top border-bottom box-shadow" style="background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Meeting App</a>
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="members" asp-action="index">Matches</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="lists" asp-action="index">Lists</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="messages" asp-action="index">Messages</a>
-                        </li>
-              
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="buggy" asp-action="index">Errors</a>
-                        </li>
-                    </ul>
-                    <div class="dropdown">
-                        <img src="/assets/user.png" alt="" style="max-height:50px; border:2px solid #fff; display:inline;" />
-                        <a class="btn dropdown-toggle text-white" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            Welcome 
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item" asp-controller="members" asp-action="memberupdate"><i class="fa fa-user-edit mr-3"></i> Edit Profile</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" asp-controller="account" asp-action="logout"><i class="fa fa-door-open mr-3"></i> Logout</a></li>
-                        </ul>
-                    </div>
-            </div>
-        </nav>        
+        <partial name="_NavBar" />
+
     </header>
     <div class="container" style="margin-top:100px;">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        @RenderBody()
+      
     </div>
 
     <footer class="border-top footer text-muted">

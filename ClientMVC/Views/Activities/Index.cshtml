@@ -1,8 +1,16 @@
-﻿@model ICollection<Activity>
-<ul>
-    @foreach (var activity in Model)
-    {
-        <li>@activity.Title</li>
+﻿@model ActivitiesDashBoard
+<div class="row p-4 my-4">
+    <div class="col-7 bg-white rounded">
+        <partial name="_ActivityList" model="@Model.Activities" />
+    </div>
+    <div class="col-4">
+        <partial name="_ActivityDetails" model="new ActivityFormViewModel{
+                            EditMode = Model.EditMode,
+                            SelectedActivity = Model.SelectedActivity}" />
+        <partial name="_ActivityForm" 
+                 model="new ActivityFormViewModel{
+                            EditMode = Model.EditMode,
+                            SelectedActivity = Model.SelectedActivity}" />
 
-    }
-</ul>
+    </div>   
+</div>

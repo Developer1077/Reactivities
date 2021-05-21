@@ -1,11 +1,8 @@
 ﻿using ClientMVC.Services;
+using ClientMVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace ClientMVC.Controllers
@@ -20,12 +17,72 @@ namespace ClientMVC.Controllers
             _logger = logger;
             _activitiesService = activitiesService;
         }
-        public async Task<IActionResult> Index() {
-
-            var activities = await _activitiesService.GetActivitiesAsync();
-
-             //_logger.LogInformation(JsonSerializer.Serialize(activities));
-            return View(activities);
+        public async Task<IActionResult> Index(string id = null, string edit = null)
+        {
+            var activitiesDashBoard = new ActivitiesDashBoard
+            {
+                Activities = await _activitiesService.GetActivitiesAsync(),
+                SelectedActivity = (id == null) ? null : await _activitiesService.GetActivityAsync(id),
+                EditMode = (edit == "true") ? true : false
+            };
+            return View(activitiesDashBoard);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ActivityFormViewModel model)
+        {
+            if (ModelState.IsValid) { 
+                if (model.SelectedActivity.Id!= null) {
+                    //edit
+                    
+                    if (await _activitiesService.UpdateActivityAsync(model.SelectedActivity))
+                    {
+                        return RedirectToAction(nameof(Index), new { id = model.SelectedActivity.Id });
+                    }
+                    else
+                    {
+                        var activitiesDashBoard = new ActivitiesDashBoard
+                        {
+                            Activities = await _activitiesService.GetActivitiesAsync(),
+                            SelectedActivity = model.SelectedActivity,
+                            EditMode = true
+                        };
+                        return View("Index", activitiesDashBoard);
+                    }
+                }
+                else
+                {
+                    //create
+                    model.SelectedActivity.Id = Guid.NewGuid().ToString();
+
+                    if (await _activitiesService.CreateActivityAsync(model.SelectedActivity))
+                    {
+                        return RedirectToAction(nameof(Index), new { id = model.SelectedActivity.Id });
+                    }
+                    else 
+                    {
+                        var activitiesDashBoard = new ActivitiesDashBoard
+                        {
+                            Activities = await _activitiesService.GetActivitiesAsync(),
+                            SelectedActivity = model.SelectedActivity,
+                            EditMode = true
+                        };
+
+                        return View("Index",activitiesDashBoard);
+                    }
+                }
+            }           
+            return View(nameof(Index));
+        }
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (!String.IsNullOrEmpty(id))
+            {
+                await _activitiesService.DeleteActivityAsync(id);
+            }
+            
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
