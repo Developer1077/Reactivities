@@ -1,0 +1,61 @@
+﻿@model ActivityFormViewModel
+<div class="col-12">
+
+    <div class="bg-white p-4 w-100 rounded mt-5">
+        <h5 class="pb-2">
+            @((Model.SelectedActivity == null) ? "Create New Activity" : "Update Activity")
+        </h5>
+
+        <form method="post" autocomplete="false" asp-action="edit" asp-controller="activities">
+            <input type="hidden" asp-for="SelectedActivity.Id" />
+            @*<input type="hidden" asp-for="SelectedActivity.HostUsername" />
+            <input type="hidden" asp-for="SelectedActivity.IsHost" />
+            <input type="hidden" asp-for="SelectedActivity.IsGoing" />
+            <input type="hidden" asp-for="SelectedActivity.IsCancelled" />
+            <input type="hidden" asp-for="SelectedActivity.Attendees" />
+            <input type="hidden" asp-for="SelectedActivity.Host" />*@
+            
+            <div>
+                <div asp-validation-summary="ModelOnly" class="list-block text-danger pt-2 pr-0"></div>
+            </div>
+            <small class="text-info font-weight-bold">ACTIVITY DETAILS</small>
+            <div class="form-group">
+                <input type="text" asp-for="SelectedActivity.Title" class="form-control" placeholder="Title" />
+                <span asp-validation-for="SelectedActivity.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <textarea type="text" asp-for="SelectedActivity.Description" class="form-control" placeholder="Description"></textarea>
+                <span asp-validation-for="SelectedActivity.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <select class="custom-select mb-3"
+                        asp-for="SelectedActivity.Category"
+                        asp-items="@Model.CategoryItems">
+                    @*asp-items="@(new SelectList(Model.CategoryItems, " Value", "Text"))*@
+                </select>
+                <span asp-validation-for="SelectedActivity.Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="date" asp-for="SelectedActivity.Date" class="form-control" placeholder="Date" />
+                <span asp-validation-for="SelectedActivity.Date" class="text-danger"></span>
+            </div>
+            <small class="text-info font-weight-bold">LOCATION DETAILS</small>
+            <div class="form-group">
+                <input type="text" asp-for="SelectedActivity.City" class="form-control" placeholder="City" />
+                <span asp-validation-for="SelectedActivity.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="text" asp-for="SelectedActivity.Venue" class="form-control" placeholder="Venue" />
+                <span asp-validation-for="SelectedActivity.Venue" class="text-danger"></span>
+            </div>
+            <div class="form-group d-flex justify-content-end">
+                <a class="btn btn-secondary mr-1" asp-action="index" asp-controller="activities" asp-route-id="@((Model.SelectedActivity == null) ? " " : Model.SelectedActivity.Id)">Cancel</a>
+                <button type="submit" class="btn btn-success">
+                    @((Model.SelectedActivity == null) ? "Create" : "Update")
+
+                </button>
+            </div>
+        </form>
+    </div>
+
+</div>

@@ -9,9 +9,9 @@ namespace ClientMVC.ViewModels
 {
     public class ActivitiesDashBoard
     {
-        public ICollection<Activity> Activities { get; set; }
-        public Activity SelectedActivity { get; set; }        
-        public bool EditMode { get; set; } = false;
+        public IEnumerable<IGrouping<string,Activity>> Activities { get; set; }
+       // public Activity SelectedActivity { get; set; }        
+        //public bool EditMode { get; set; } = false;
        
 
     }

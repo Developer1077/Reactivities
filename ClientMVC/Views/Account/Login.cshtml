@@ -1,0 +1,31 @@
+﻿@model LoginViewModel
+    <div class="col-4 offset-4 bg-white p-4">
+        <form method="post" autocomplete="off">
+            <h5 class="text-center">Login to Reactivities</h5>
+            <div>
+                <div asp-validation-summary="ModelOnly" class="list-block text-danger pt-2 pr-0"></div>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="Email" type="text" class="form-control" placeholder="Email" />
+                <span asp-validation-for="Email" calss="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Password" type="password" class="form-control" placeholder="Password" />
+                <span asp-validation-for="Password" calss="text-danger"></span>
+            </div>
+            
+            <div class="form-group text-center">
+                <button type="submit" class="form-control btn btn-success mr-2">Login</button>
+            </div>
+        </form>
+    </div>
+    @section Styles{
+        <style type="text/css">
+
+            .list-block ul {
+                list-style-type: none;
+                width: auto;
+            }
+        </style>
+    }

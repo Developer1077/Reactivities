@@ -1,0 +1,32 @@
+﻿@model Activity
+<div class="row">
+    @if (Model != null)
+    {
+        <div class="col-7">
+            <partial name="_ActivityDetailedHeader" model="Model" />
+            <partial name="_ActivityDetailedInfo" model="Model" />
+            <partial name="_ActivityDetailedChat" model="Model" />
+        </div>
+        <div class="col-4">
+            <partial name="_ActivityDetailedSidebar" model="Model" />
+        </div>
+    }
+</div>
+
+
+@section Styles{
+    <style type="text/css">
+        .overlay-dark {
+            -webkit-filter: contrast(10%);
+            -moz-filter: contrast(10%);
+            filter: url(#contrast);
+            filter: contrast(10%);
+        }
+    </style>
+    <link rel="stylesheet" href="~/css/ribbon.css" />
+}
+
+
+@section Scripts{
+   
+}

@@ -1,20 +1,66 @@
-﻿@model ICollection<Activity>
-@foreach (var activity in Model)
+﻿@model IEnumerable<IGrouping<string, Activity>>
+@foreach (var group in Model)
 {
-    <div class="mx-2 py-4">
-        
-            <h5 class="card-title">@activity.Title</h5>
-            <span>@activity.Date</span>
-            <h6>@activity.Description</h6>
-            <div class="btn-toolbar justify-content-between" role="toolbar">
-                <a class="btn btn-outline-secondary">@activity.Category</a>
-                <div>
-                    <a class="btn btn-danger" asp-controller="activities" asp-action="delete" asp-route-id="@activity.Id">Delete</a>
-                    <a class="btn btn-primary" asp-controller="activities" asp-action="index" asp-route-id="@activity.Id">View</a>
+    <small class="text-info font-weight-bolder">@group.Key</small>
+    <div class="my-3">
 
+        @foreach (var activity in group)
+        {
+
+
+            <div class="card mb-2">
+                @if (activity.IsCancelled)
+                {
+                    <div class="bg-danger text-white text-center ">
+                        <small>Cancelled</small>
+                    </div>
+                }
+                <div class="card-body d-flex flex-column">
+
+                    <div class="d-flex align-items-center">
+                        <span class="mr-3">
+                            <img src="~/images/user.png" class="rounded-circle" alt="" style="max-width:80px">
+                        </span>
+                        <div class="d-flex flex-column">
+                            <span class="text-dark font-weight-bold font-size-h5">@activity.Title</span>
+                            <small>hosted by @activity.Host?.DisplayName</small>
+                            @if (activity.IsHost)
+                            {
+                                <small class="border border-danger border-3 text-danger bg-white px-2 pb-1 mt-2 font-weight-bold">You are hosting this activity</small>
+                            }
+                            @if (activity.IsGoing && !activity.IsHost)
+                            {
+                                <small class="border border-success border-3 text-success bg-white px-2 pb-1 mt-2 font-weight-bold">
+                                    You are going to this activity
+                                </small>
+                            }
+                        </div>
+                    </div>
                 </div>
+                <div class="card-footer bg-white d-flex align-items-center justify-content-between flex-wrap py-2">
+                    <div class="py-1">
+                        <i class="fa fa-clock mr-2"></i>@activity.Date.ToShortDateString()
+                        <i class="fa fa-map-marker ml-3 mr-2"></i>@activity.Venue
+                    </div>
+                </div>
+                <div class="card-footer py-1">
+                    <small class="font-weight-normal"><partial name="_ActivityListItemAttendee" model="activity.Attendees" /></small>
+                </div>
+                <div class="card-footer  bg-white bg-whit py-4">
+
+                    <div class="btn-toolbar justify-content-between" role="toolbar">
+                        <small class="font-weight-bold">@activity.Description</small>
+                        <div>
+                            <a class="btn btn-danger" asp-controller="activities" asp-action="delete" asp-route-id="@activity.Id">Delete</a>
+                            <a class="btn btn-info" asp-controller="activities" asp-action="details" asp-route-id="@activity.Id">View</a>
+
+                        </div>
+                    </div>
+                </div>
+                <!--end::Footer-->
             </div>
-            <hr class="mb-0 pb-0"/>
-        
+
+        }
     </div>
+
 }

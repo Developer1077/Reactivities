@@ -1,0 +1,20 @@
+﻿@model ApiException
+
+@if (Model != null)
+{
+    <h2>Server Error</h2>
+
+    <h5>@Model.Message</h5>
+
+    @if (Model.Details != null)
+    {
+        <div class="bg-white p-4 my-4">
+            @Model.Details
+        </div>
+    }
+
+}
+
+<div class="text-center p-4 m-4">
+    <a class="btn btn-primary text-white" asp-controller="activities" asp-action="index">Back to activities Page</a>
+</div>

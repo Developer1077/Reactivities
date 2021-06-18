@@ -1,0 +1,40 @@
+﻿@model Activity
+@if (Model != null)
+{
+    @if (Model.Attendees != null)
+    {
+        <div class="card">
+            <div class="card-header bg-info text-white text-center">
+                @Model.Attendees.Count @((Model.Attendees.Count == 1 ? "Person" : "People")) Going
+            </div>
+            @foreach (var attendee in Model.Attendees)
+            {
+
+                <div class="card-footer bg-white py-2 @(attendee.Username == Model.HostUsername ? "box" : "") ">
+                    <div class="row">
+                        @if (attendee.Username == Model.HostUsername)
+                        {       
+                            <div class="ribbon red"><span>Host</span></div>                         
+                        }
+                        <div class="col-3">
+                            <a asp-controller="pofiles" asp-action="index" asp-route-id="@attendee.Username"><img src="@((attendee.Image != null) ? attendee.Image : "/images/user.png")" alt="" class="rounded-circle" style="max-width:60px;" /></a>
+
+                        </div>
+                        <div class="col-9">
+                            <span class="font-size-h6 font-weight-bold text-primary">@attendee.DisplayName</span>
+
+                            <br />
+                            <small class="text-danger font-weight-bold">Following</small>
+
+                        </div>
+                    </div>
+                </div>
+                
+            }
+
+         </div>
+
+    }
+
+}
+

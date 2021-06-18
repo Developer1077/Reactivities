@@ -1,0 +1,53 @@
+﻿@{
+    var text = "Join Activity";
+    var style = "btn btn-info";
+    var action = "attend";
+
+    if (Model.IsHost)
+    {
+        text = "Manage Event";
+        style = "btn btn-warning text-white";
+        action = "edit";
+    }
+    else
+    {
+        if (Model.IsGoing)
+        {
+            text = "Cancel Attendance";
+            style = "btn btn-secondary";
+
+        }
+    }
+
+}
+<div class="card ">
+    
+    <div calss="@(Model.IsCancelled ? "box" : "") ">
+        @if (Model.IsCancelled)
+        {
+            <div class="ribbon red"><span>Cancelled</span></div>
+        }
+        <img src="/images/categoryImages/@(Model.Category).jpg" class="card-img-top overlay-dark " alt="@Model.Category">
+
+        <div class="card-img-overlay text-white d-flex align-items-center ">
+
+            <div>
+                <h3>@Model.Title</h3>
+                <small>@Model.Date.ToShortDateString()</small>
+                <p>Hosted by <a class="text-warning" asp-controller="Profiles" asp-action="index" asp-route-id="@Model.HostUsername">@Model.Host.DisplayName</a></p>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card-footer bg-white d-flex justify-content-between ">
+    <div>
+        <a class="@style" asp-controller="activities" asp-action="@action" asp-route-id="@Model.Id">@text</a>
+    </div>
+    <div>
+        @if (Model.IsHost)
+        {
+        <a class="@(Model.IsCancelled ? "btn btn-outline-success" : "btn btn-outline-danger")" asp-controller="activities" asp-action="attend" asp-route-id="@Model.Id">@(Model.IsCancelled ? "Re-activate Activity" : "Cancel Activity")</a>
+        }
+    </div>
+</div>

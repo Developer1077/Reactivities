@@ -1,0 +1,21 @@
+﻿@model ICollection<Profile>
+<div class="row">
+        @if (Model != null)
+        {
+
+            @foreach (var attendee in Model)
+            {
+                <div class="col-2">
+
+                    <partial name="_ProfileCard" model="@attendee" />
+
+                    @*<a href="#" data-toggle="popover" title="@attendee.DisplayName" data-content="ss<image src='/images/user.png'/>@("<partial name='_ProfileCard' model='@attendee' />")">
+                            <img src="@((attendee.Image!=null) ? attendee.Image : "/images/user.png")" alt="" class="rounded-circle" style="max-height:40px;" />
+                        </a>*@
+
+                </div>
+            }
+
+        }
+
+</div>

@@ -1,0 +1,13 @@
+﻿<div class="text-center">
+
+    <a class="btn btn-info text-white" asp-controller="buggy" asp-action="GetNotFound">Not Found</a>
+    <a class="btn btn-info text-white" asp-controller="buggy" asp-action="GetBadRequest">Bad Request</a>
+    <a class="btn btn-info text-white" asp-controller="buggy" asp-action="GetValidationError">Validation Error</a>
+    <a class="btn btn-info text-white" asp-controller="buggy" asp-action="GetServerError">ServerError</a>
+    <a class="btn btn-info text-white" asp-controller="buggy" asp-action="GetUnauthorised">Unauthorised</a>
+    <a class="btn btn-info text-white" asp-controller="buggy" asp-action="GetBadGuid">Bad Guid</a>
+</div>
+<br />
+<div class="p-4 bg-white">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+</div>

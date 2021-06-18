@@ -1,0 +1,41 @@
+﻿@model User 
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark fixed-top border-bottom box-shadow" style="max-height: 50px;background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);">
+    <div class="container">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+            <img src="/images/logo.png" alt="logo" style="max-height:45px;" /> Reactivities
+        </a>
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="activities" asp-action="index" asp-route-id="">Activities</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="buggy" asp-action="index" asp-route-id="">Errors</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-success" asp-controller="activities" asp-action="edit">Create Activity</a>
+            </li>
+        </ul>
+        @if (Model != null)
+        {
+        <div class="dropdown">
+            <img src="/images/user.png" alt="" class="rounded-circle" style="max-height:40px;"/>
+            <a class="btn dropdown-toggle text-white" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                @Model.DisplayName
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" asp-controller="members" asp-action="memberupdate"><i class="fa fa-user-edit mr-3"></i> Edit Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" asp-controller="account" asp-action="logout"><i class="fa fa-door-open mr-3"></i> Logout</a></li>
+            </ul>
+        </div>
+        }
+        else 
+        {
+             <div class="text-center">
+                <a class="btn btn-outline-light pt-1" asp-controller="account" asp-action="login">Login</a>
+                <a class="btn btn-outline-light pt-1" asp-controller="account" asp-action="register">Register</a>
+            </div>
+  
+        }
+    </div>
+</nav>

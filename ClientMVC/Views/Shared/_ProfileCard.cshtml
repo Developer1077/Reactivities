@@ -1,0 +1,15 @@
+﻿@model Profile
+<div class="card mb-0 bp-0"  style="max-width:75px;">
+    <div class="card-img-wrapper text-center">
+        <img src="@(!String.IsNullOrEmpty(Model.Image)?Model.Image:"/images/user.png")" class="card-img-top"/>
+    </div>
+    <div class="card-body text-center p-0 m-0">
+        <small>
+            @Model.DisplayName
+        </small>
+    </div>
+    <div class="card-footer p-0 m-0">
+        <i class="fa fa-user"></i>
+        <small class="text-muted">20 followers</small>
+    </div>
+</div>
